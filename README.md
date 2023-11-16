@@ -31,7 +31,8 @@
 9. Или в терминале набери --> php yii serve --docroot="frontend/web/" --port=8888
 sudo apt install php-intl php-imagick (эта тоже команда открывает интерфейс приложения в браузере)
 
-   
+### Other Info and Examples
+* php yii migrate/create create_contact_table
 
 
 
