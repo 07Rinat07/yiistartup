@@ -2,10 +2,9 @@
 
 namespace frontend\controllers;
 
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use frontend\services\UserService;
+use yii\web\Controller;
+
 /**
  * Site controller
  */

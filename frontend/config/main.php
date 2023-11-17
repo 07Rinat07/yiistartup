@@ -46,9 +46,9 @@ return [
                 '' => 'site/index',
                 '/site/about' => 'site/about',
                 '/site/contact' => 'site/contact',
-                '/site/signup' => 'site/signup',
                 '/site/login' => 'site/login',
                 '/site/captcha' => 'site/captcha',
+                '/site/signup' => 'site/signup',
                 '/lk' => 'lk/index'
             ],
         ],
