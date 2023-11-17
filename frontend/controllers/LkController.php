@@ -1,15 +1,29 @@
 <?php
-
 namespace frontend\controllers;
 
-use frontend\services\UserService;
 use yii\web\Controller;
-
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use frontend\services\UserService;
 /**
  * Site controller
  */
 class LkController extends Controller
 {
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ]
+        ];
+    }
     /**
      * lk
      *
@@ -17,22 +31,22 @@ class LkController extends Controller
      */
     public function actionIndex()
     {
+
         if (\Yii::$app->user->identity) {
             $user = \Yii::$container->get(UserService::class)->run(\Yii::$app->user->identity->id);
             if ($user) {
-                echo 'Вы подписаны';
+                $status = 'Вы подписаны';
             } else {
-                echo 'Вы не подписаны';
+                $status = 'Вы не подписаны';
             }
-        }else {
-            echo 'Вы не подписаны';
+        } else {
+            $status = 'Вы не подписаны';
         }
 
-        return true;
-        // return $this->render('index');
+        return $this->render('index', [
+            'points' => \Yii::$app->point->points(),
+            'status' => $status
+        ]);
     }
+
 }
-
-
-
-

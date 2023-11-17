@@ -33,6 +33,9 @@ return [
                 ],
             ],
         ],
+        'point' => [
+          'class' => 'common\components\Point'
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -49,6 +52,7 @@ return [
                 '/site/login' => 'site/login',
                 '/site/captcha' => 'site/captcha',
                 '/site/signup' => 'site/signup',
+                '/site/logout' => 'site/logout',
                 '/lk' => 'lk/index'
             ],
         ],
