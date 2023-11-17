@@ -36,14 +36,21 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+
         'urlManager' => [
+            'baseUrl' => '/',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => true,
             'rules' => [
+                '' => 'site/index',
+                '/site/about' => 'site/about',
+                '/site/contact' => 'site/contact',
+                '/site/captcha' => 'site/captcha',
+                '/lk' => 'lk/index'
             ],
         ],
-        */
+
     ],
     'params' => $params,
 ];
