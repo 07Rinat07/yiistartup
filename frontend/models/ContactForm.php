@@ -4,7 +4,7 @@ namespace frontend\models;
 
 use Yii;
 use yii\base\Model;
-
+use common\models\Contact;
 /**
  * ContactForm is the model behind the contact form.
  */
@@ -40,6 +40,20 @@ class ContactForm extends Model
         return [
             'verifyCode' => 'Verification Code',
         ];
+    }
+
+    public function send()
+    {
+        if (!$this->validate()) {
+            return null;
+        }
+        $contact = new Contact();
+        $contact->name = $this->name;
+        $contact->email = $this->email;
+        $contact->subject = $this->subject;
+        $contact->body = $this->body;
+        $contact->save();
+        return $contact->save() && $this->sendEmail($this->email);
     }
 
     /**
