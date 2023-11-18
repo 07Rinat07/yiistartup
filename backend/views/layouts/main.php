@@ -2,11 +2,14 @@
 /** @var \yii\web\View $this */
 /** @var string $content */
 
-use backend\assets\AppAsset;
 use backend\assets\TemplateAsset;
+use backend\assets\AppAsset;
 use common\widgets\Alert;
 use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
+use yii\bootstrap5\Nav;
+use yii\bootstrap5\NavBar;
+use yii\helpers\Url;
 
 TemplateAsset::register($this);
 AppAsset::register($this);
@@ -59,14 +62,14 @@ AppAsset::register($this);
                         <b class="logo-icon">
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="assetstemplate/assets/images/logo-light-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="<?=Yii::getAlias('@web')?>/assetstemplate/assets/images/logo-light-icon.png" alt="homepage" class="dark-logo" />
 
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span class="logo-text">
                             <!-- dark Logo text -->
-                            <img src="assetstemplate/assets/images/logo-light-text.png" alt="homepage" class="dark-logo" />
+                            <img src="<?=Yii::getAlias('@web')?>/assetstemplate/assets/images/logo-light-text.png" alt="homepage" class="dark-logo" />
 
                         </span>
                     </a>
@@ -114,7 +117,7 @@ AppAsset::register($this);
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="assetstemplate/assets/images/users/1.jpg" alt="user" class="profile-pic me-2">Markarn Doe
+                                <img src="<?=Yii::getAlias('@web')?>assetstemplate/assets/images/users/1.jpg" alt="user" class="profile-pic me-2">Markarn Doe
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown"></ul>
                         </li>
@@ -136,15 +139,15 @@ AppAsset::register($this);
                     <ul id="sidebarnav">
                         <!-- User Profile-->
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                     href="index.html" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
+                                                     href="" aria-expanded="false"><i class="mdi me-2 mdi-gauge"></i><span
                                         class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                     href="pages-profile.html" aria-expanded="false">
+                                                     href="<?=Url::to(['user/index'])?>" aria-expanded="false">
                                 <i class="mdi me-2 mdi-account-check"></i><span class="hide-menu">Profile</span></a>
                         </li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                                     href="table-basic.html" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
-                                        class="hide-menu">Table</span></a></li>
+                                                     href="<?=Url::to(['items/index'])?>" aria-expanded="false"><i class="mdi me-2 mdi-table"></i><span
+                                        class="hide-menu">Предложение</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                                      href="icon-material.html" aria-expanded="false"><i
                                         class="mdi me-2 mdi-emoticon"></i><span class="hide-menu">Icon</span></a></li>
