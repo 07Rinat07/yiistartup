@@ -42,6 +42,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'site/index',
+                ['pattern' => 'site/<action>', 'route' => 'site/<action>'],
+                ['pattern' => 'user/<action>', 'route' => 'user/<action>']
             ],
         ],
 
