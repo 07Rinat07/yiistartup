@@ -1,13 +1,13 @@
 <?php
 
-use common\models\Items;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use common\models\Items;
 
-/** @var yii\web\View $this */
-/** @var yii\data\ActiveDataProvider $dataProvider */
+/* @var $this yii\web\View */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Items';
 $this->params['breadcrumbs'][] = $this->title;
@@ -34,13 +34,22 @@ $this->params['breadcrumbs'][] = $this->title;
             //'subject',
             //'body:ntext',
             [
+                'attribute' => 'image',
+                'format' => 'html',
+                'value' => function($data){
+                    return Html::img('/uploads/' . $data['image'], ['width' => '80px']);
+                },
+            ],
+            [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Items $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>
 
 
 </div>
+
+

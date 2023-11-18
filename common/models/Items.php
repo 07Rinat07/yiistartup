@@ -35,7 +35,7 @@ class Items extends \yii\db\ActiveRecord
         return [
             [['user_id'], 'integer'],
             [['body'], 'string'],
-            [['name', 'email', 'phone', 'subject'], 'string', 'max' => 50],
+            [['name', 'email', 'phone', 'subject', 'image'], 'string', 'max' => 50],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -53,6 +53,7 @@ class Items extends \yii\db\ActiveRecord
             'phone' => 'Phone',
             'subject' => 'Subject',
             'body' => 'Body',
+            'image' => 'Картинка',
         ];
     }
 
@@ -65,5 +66,17 @@ class Items extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
-}
+    /**
+     * Gets query for [[User]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function upload($type)
+    {
+        $filename = uniqid();
+        $filename = $filename . '.' . $type->extension;
+        $type->saveAs('uploads/' . $filename);
 
+        return $filename;
+    }
+}

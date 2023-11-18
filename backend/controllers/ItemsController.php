@@ -1,5 +1,4 @@
 <?php
-
 namespace backend\controllers;
 
 use common\models\Items;
@@ -7,6 +6,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * ItemsController implements the CRUD actions for Items model.
@@ -80,7 +80,13 @@ class ItemsController extends Controller
         $model = new Items();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post())) {
+                $model->user_id = Yii::$app->user->identity->id;
+                $model->image = \yii\web\UploadedFile::getInstance($model, 'image');
+                $filename = $model->upload($model->image);
+                $model->image = $filename;
+
+                $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {

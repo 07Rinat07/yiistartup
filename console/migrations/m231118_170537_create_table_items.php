@@ -12,9 +12,10 @@ class m231118_170537_create_table_items extends Migration
      */
     public function safeUp()
     {
-        $this->execute('CREATE TABLE items (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50), email VARCHAR(50), user_id INTEGER(11),phone VARCHAR(50), subject VARCHAR(50), body TEXT)');
+        $this->execute('CREATE TABLE items (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(50), email VARCHAR(50), user_id INTEGER(11), phone VARCHAR(50), image VARCHAR(50), subject VARCHAR(50), body TEXT)');
 
         $this->execute('ALTER TABLE items ADD CONSTRAINT fk_items_users_key FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE');
+
 
     }
 
