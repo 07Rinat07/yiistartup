@@ -26,6 +26,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'image')->fileInput()->label(false) ?>
 
+    <?php
+    if (!empty($model->image)) {
+        echo Html::img('../uploads/' . $model->image, ['width' => '120px']);
+    }
+    ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

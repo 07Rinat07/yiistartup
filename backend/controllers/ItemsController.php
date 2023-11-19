@@ -109,7 +109,36 @@ class ItemsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        $imageNow = $model->image;
+
+        $deleteImage = false;
+
+        if ($this->request->isPost && $model->load($this->request->post())) {
+
+            $connection = Yii::$app->db->beginTransaction();
+
+            try {
+                $model->image = \yii\web\UploadedFile::getInstance($model, 'image');
+
+                if (!empty($model->image)) {
+                    $filename = $model->upload($model->image);
+                    $model->image = $filename;
+                    $deleteImage = true;
+                } else {
+                    $model->image = $imageNow;
+                }
+
+                if ($model->save()) {
+                    if ($deleteImage && !empty($imageNow)) {
+                        @unlink('uploads/' . $imageNow);
+                    }
+                }
+
+                $connection->commit();
+            } catch (Exception $s) {
+                $connection->rollback();
+            }
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -127,7 +156,11 @@ class ItemsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $imageNow = $model->image;
+        $model->image = $imageNow;
+        @unlink('uploads/' . $imageNow);
+        $model->delete();
 
         return $this->redirect(['index']);
     }

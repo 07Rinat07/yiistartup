@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/** @var yii\web\View $this */
-/** @var common\models\Items $model */
+/* @var $this yii\web\View */
+/* @var $model common\models\Items */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Items', 'url' => ['index']];
@@ -36,7 +36,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone',
             'subject',
             'body:ntext',
+            [
+                'format' => 'html',
+                'attribute' => 'image',
+                'value' => Html::img('../uploads/' . $model->image, ['width' => '120px']),
+            ]
         ],
     ]) ?>
 
 </div>
+
