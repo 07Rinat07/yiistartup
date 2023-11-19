@@ -7,7 +7,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use Yii;
-
+use yii\caching\TagDependency;
 /**
  * ItemsController implements the CRUD actions for Items model.
  */
@@ -87,6 +87,9 @@ class ItemsController extends Controller
                 $model->image = $filename;
 
                 $model->save();
+
+                TagDependency::invalidate(Yii::$app->cache, 'items');
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -133,7 +136,7 @@ class ItemsController extends Controller
                         @unlink('uploads/' . $imageNow);
                     }
                 }
-
+                TagDependency::invalidate(Yii::$app->cache, 'items');
                 $connection->commit();
             } catch (Exception $s) {
                 $connection->rollback();
@@ -161,7 +164,7 @@ class ItemsController extends Controller
         $model->image = $imageNow;
         @unlink('uploads/' . $imageNow);
         $model->delete();
-
+        TagDependency::invalidate(Yii::$app->cache, 'items');
         return $this->redirect(['index']);
     }
 

@@ -28,18 +28,17 @@ return [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => \yii\log\FileTarget::class,
+                    'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
             ],
         ],
         'point' => [
-          'class' => 'common\components\Point'
+            'class' => 'common\components\Point'
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-
         'urlManager' => [
             'baseUrl' => '/',
             'enablePrettyUrl' => true,
@@ -49,14 +48,14 @@ return [
                 '' => 'site/index',
                 '/site/about' => 'site/about',
                 '/site/contact' => 'site/contact',
-                '/site/login' => 'site/login',
                 '/site/captcha' => 'site/captcha',
+                '/site/login' => 'site/login',
                 '/site/signup' => 'site/signup',
                 '/site/logout' => 'site/logout',
                 '/lk' => 'lk/index'
             ],
         ],
-
     ],
     'params' => $params,
 ];
+
